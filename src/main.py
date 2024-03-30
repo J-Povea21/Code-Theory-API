@@ -1,8 +1,10 @@
 from fastapi import FastAPI
-from src.schemas.message import Message
-from src.schemas.matrix import Matrix
+from src.schemas.caesar import Message
+from src.schemas.lineal_code import GeneratorMatrix
+from src.schemas.control_matrix import ControlMatrix
 from src.core.encryptor import encrypt, decrypt
-from src.core.code_elems import ejecutable
+from src.core.code_elems import lineal_code
+from src.core.control_matrix import control_matrix
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -30,5 +32,10 @@ async def decrypt_text(msg: Message):
 
 # Matrix Endpoints (Keiver123)
 @app.post("/lineal-code")
-async def lineal_code(matrix: Matrix):
-    return {"message": ejecutable(matrix.MatrisG, matrix.z)}
+async def lineal_code_params(code_info: GeneratorMatrix):
+    return lineal_code(code_info.matrix, code_info.z)
+
+# Generator Matrix to Control Matrix (Clau210605)
+@app.post("/generator-to-control")
+async def generator_to_control(code_info: ControlMatrix):
+    return {"matrix": control_matrix(code_info.n, code_info.k,code_info.matrix,code_info.z)}
