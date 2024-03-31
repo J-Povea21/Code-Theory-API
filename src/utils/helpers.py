@@ -2,6 +2,9 @@ from math import comb
 
 def min_distance(code: list) -> int:
     
+    if len(code) == 1:
+        return 0
+
     def count_diff(a: str, b: str) -> int:
         count = sum(1 for char1, char2 in zip(a, b) if char1 != char2)
         return count
@@ -19,14 +22,18 @@ def min_distance(code: list) -> int:
 
 
 def code_exists(code: list, n: int, z: int) -> bool:
-    m = len(code)
-    d = min_distance(code)
-    t = (d-1)//2
+    try:
+        m = len(code)
+        d = min_distance(code)
+        t = (d-1)//2
 
-    # Singleton bound
-    singleton = z**(n-d+1)
+        # Singleton bound
+        singleton = z**(n-d+1)
 
-    # Hamming bound
-    hamming = (z**n)/(sum( [ comb(n,j)*(z-1)**j for j in range(t+1) ] ) )
+        # Hamming bound
+        hamming = (z**n)/(sum( [ comb(n,j)*(z-1)**j for j in range(t+1) ] ) )
 
-    return singleton <= m <= hamming
+        return singleton <= m <= hamming
+
+    except Exception as e:
+        return False
