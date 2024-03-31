@@ -12,9 +12,9 @@ def decrypt(shift: int, encrypted_text:str) -> str:
 def __encryptor(shift: int, msg: str, decrypt: bool = False) -> str:
     
     if shift <= 0 and not decrypt:
-        return "Invalid shift. It must be positive, try again!"
+        return {"success": False, "message": "Invalid shift. It must be positive, try again!"}
     elif msg is None or msg == '':
-        return "Invalid message! Please submit a valid one" 
+        return {"sucess": False, "message": "Invalid message! Please submit a valid one"} 
     
     encrypted_text = ''
     try:
@@ -22,6 +22,6 @@ def __encryptor(shift: int, msg: str, decrypt: bool = False) -> str:
             encrypted_index = (alphabet.index(char) + shift) % set_length
             encrypted_text += alphabet[encrypted_index]
         
-        return encrypted_text
+        return {"success": True, "message": encrypted_text }
     except ValueError:
-        return "Ups! You inserted a character that we don´t support, try again"
+        return {"success": False,"message":"Ups! You inserted a character that we don´t support, try again"}

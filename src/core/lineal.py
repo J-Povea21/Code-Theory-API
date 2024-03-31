@@ -54,7 +54,8 @@ def lineal_code(gen_matrix,z):
     matrixO = create_matrix(codewords)
     elem = codewords_to_string(matrixO)
     return {
+        "success": True,
         "codewords": codewords_to_string(matrixO),
         "n": len(gen_matrix[0]), 
         "k": get_k(elem,z)
-           }
+        }

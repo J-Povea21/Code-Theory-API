@@ -1,5 +1,6 @@
 from typing import List
 import numpy as np
+from src.utils.helpers import code_exists
 
 # Gets the base of the code
 def code_base(code):
@@ -49,4 +50,4 @@ def control_matrix(n, k, code, z):
     while not check_matrix(H, code, z_set):
         H = get_control_matrix(n, k, base, z_set)
     
-    return H.tolist()
+    return {"success": True, "matrix": H.tolist()}
