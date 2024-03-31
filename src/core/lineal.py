@@ -48,14 +48,17 @@ def get_k(codewords,z):
     return int(k)
 
 def lineal_code(gen_matrix,z):
-    arrays = generate_vector(z,len(gen_matrix))
-    arrays = np.array(arrays)
-    codewords = get_lineal_code(gen_matrix,z,arrays)
-    matrixO = create_matrix(codewords)
-    elem = codewords_to_string(matrixO)
-    return {
-        "success": True,
-        "codewords": codewords_to_string(matrixO),
-        "n": len(gen_matrix[0]), 
-        "k": get_k(elem,z)
-        }
+    try:
+        arrays = generate_vector(z,len(gen_matrix))
+        arrays = np.array(arrays)
+        codewords = get_lineal_code(gen_matrix,z,arrays)
+        matrixO = create_matrix(codewords)
+        elem = codewords_to_string(matrixO)
+        return {
+            "success": True,
+            "codewords": codewords_to_string(matrixO),
+            "n": len(gen_matrix[0]), 
+            "k": get_k(elem,z)
+            }
+    except Exception as e:
+        return {"success": False, "message": e.args[0]}

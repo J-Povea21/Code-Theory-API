@@ -25,3 +25,5 @@ def __encryptor(shift: int, msg: str, decrypt: bool = False) -> str:
         return {"success": True, "message": encrypted_text }
     except ValueError:
         return {"success": False,"message":"Ups! You inserted a character that we don´t support, try again"}
+    except Exception as e:
+        return {"success": False,"message": e.args[0]}

@@ -42,12 +42,16 @@ def check_matrix(H, code, z):
     return True 
 
 def control_matrix(n, k, code, z):
-    
-    base = code_base(code)
-    z_set = [i for i in range(z)]
-    H = get_control_matrix(n, k, base, z_set)
 
-    while not check_matrix(H, code, z_set):
+    try:
+        base = code_base(code)
+        z_set = [i for i in range(z)]
         H = get_control_matrix(n, k, base, z_set)
-    
-    return {"success": True, "matrix": H.tolist()}
+
+        while not check_matrix(H, code, z_set):
+            H = get_control_matrix(n, k, base, z_set)
+        
+        return {"success": True, "matrix": H.tolist()}
+    except Exception as e:
+        return {"success" : False, "message": e.args[0]}
+
