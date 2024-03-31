@@ -3,28 +3,36 @@ from src.utils.helpers import code_exists
 import math
 
 def generator_matrix(code: list, z: int) -> dict:
+
+    if not code:
+        return {"success" : False,"message": "No code was provided"}
+
+    try:
     
-    n = len(code[0])
-
-    if not check_codewords(code, z):
-        return {"success" : False,"message": "Invalid code"}
-    elif not code_exists(code, n, z):
-        return {"success" : False,"message": "The code does not exist"}
+        n = len(code[0])
+        if not check_codewords(code, z):
+            return {"success" : False,"message": "Invalid code"}
+        elif not code_exists(code, n, z):
+            return {"success" : False,"message": "The code does not exist"}
+        
     
-   
-    m = len(code)
-    k = math.floor(math.log(m)/math.log(z))
+        m = len(code)
+        k = math.floor(math.log(m)/math.log(z))
 
-    new_code = remove_module(code)
-    base = check_bases(new_code, k, z, n)
-    matrix = base_to_matrix(base)
+        new_code = remove_module(code)
+        base = check_bases(new_code, k, z, n)
+        matrix = base_to_matrix(base)
 
-    return {
-            "success" : True,
-            "matrix": matrix,
-            "n": n,
-            "k": k
-      }
+        return {
+                "success" : True,
+                "matrix": matrix,
+                "n": n,
+                "k": k
+        }    
+
+    except Exception as e:
+        return {"success" : False,"message": e.args[0]}     
+    
 
 def check_codewords(codewords: list, z: int) -> bool:
     lenght = len(codewords[0])
