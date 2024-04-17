@@ -12,9 +12,7 @@ def generator_matrix(code: list, z: int) -> dict:
         n = len(code[0])
         if not check_codewords(code, z):
             return {"success" : False,"message": "Invalid code"}
-        elif not code_exists(code, n, z):
-            return {"success" : False,"message": "The code does not exist"}
-        
+    
     
         m = len(code)
         k = math.floor(math.log(m)/math.log(z))

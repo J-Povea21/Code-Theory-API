@@ -21,3 +21,8 @@ class ControlMatrix(BaseModel):
     z: int
     k: int
     matrix: list[list[int]]
+
+# Dual code
+class DualCode (BaseModel):
+    z: int
+    code: list[str]|list[list[int]]
