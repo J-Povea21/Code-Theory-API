@@ -43,6 +43,7 @@ def get_k(codewords,z):
 def lineal_code(gen_matrix,z):
     try:
         arrays = generate_vector(z,len(gen_matrix))
+        arrays = np.array(arrays)
         codewords = get_lineal_code(gen_matrix,z,arrays)
         matrixO = create_matrix(codewords)
         elem = arr_to_str(matrixO)
