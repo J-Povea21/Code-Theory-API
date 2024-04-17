@@ -21,7 +21,7 @@ def dual(code: list[str] | list[list[int]] , z: int = 2) -> list:
         dual_code = arr_to_str( [element for element in array if matrixial_zero(element, G, z)] )
         dual_type = code_type(codewords, dual_code, z)
 
-        return {"success": True, "url": code_to_txt(dual_code, dual_type)}
+        return code_to_txt(dual_code, dual_type)
     except Exception as e:
         return error_response(e.args[0])
 

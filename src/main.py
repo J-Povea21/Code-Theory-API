@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import ORJSONResponse
+from fastapi.responses import ORJSONResponse, FileResponse
 from src.schemas.schemas import *
 from src.core.encryptor import encrypt, decrypt
 from src.core.lineal import lineal_code
@@ -48,6 +48,6 @@ async def generator_to_control(code_info: ControlMatrix):
     return control_matrix(code_info.n, code_info.k,code_info.matrix,code_info.z)
 
 # Dual code (Amdres)
-@app.post("/dual", response_class = ORJSONResponse)
+@app.post("/dual", response_class = FileResponse)
 async def dual_code(code_info: DualCode):
     return dual(code_info.code, code_info.z)
